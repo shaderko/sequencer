@@ -1,6 +1,18 @@
+/**
+ * @file recorder.c
+ * @author your name (you@domain.com)
+ * @brief
+ * @version 0.1
+ * @date 2024-09-13
+ *
+ * @copyright Copyright (c) 2024
+ *
+ */
+
 #include <recorder.h>
 #include <time.h>
 
+#include <logger.h>
 #include <threads.h>
 #include <input.h>
 
@@ -156,15 +168,15 @@ static void StartRecording(Recorder *recorder)
 {
     if (recorder->is_recording)
     {
-        puts("[WARNING] Recorder is already recording");
+        log_message(LOG_WARNING, "Recorder is already recording");
         return;
     }
 
     recorder->is_recording = true;
 
-    printf("[Recorder] Recording started\n");
+    log_message(LOG_INFO, "Recording started");
 
-    // Start recording mouse and keyboard actions in separate threads
+    // start recording mouse and keyboard actions in separate threads
     AThreads.CreateThreads(worker_thread_func, recorder);
 }
 
@@ -172,7 +184,7 @@ static void StopRecording(Recorder *recorder)
 {
     if (!recorder->is_recording)
     {
-        puts("[WARNING] Recorder is not recording");
+        log_message(LOG_INFO, "Recorder is not recording");
         return;
     }
 
@@ -183,13 +195,13 @@ static void SelectRecord(Recorder *recorder, int index)
 {
     if (recorder->is_recording)
     {
-        puts("[WARNING] Recorder is recording");
+        log_message(LOG_WARNING, "Recorder is recording");
         return;
     }
 
     if (index < 0 || index >= recorder->record_count)
     {
-        puts("[WARNING] Invalid record index");
+        log_message(LOG_WARNING, "Invalid record index");
         return;
     }
 
@@ -206,7 +218,7 @@ static void RemoveRecord(int index)
 {
     if (index < 0 || index >= recorder->record_count)
     {
-        puts("[WARNING] Invalid record index");
+        log_message(LOG_WARNING, "Invalid record index");
         return;
     }
 
@@ -221,6 +233,57 @@ static void RemoveRecord(int index)
     recorder->record_count--;
 }
 
+static void Save(Recorder *recorder, const char *path)
+{
+    if (recorder->is_recording)
+    {
+        log_message(LOG_WARNING, "Recorder is recording");
+        return;
+    }
+
+    clear_file(path);
+
+    for (int i = 0; i < recorder->record_count; i++)
+    {
+        Serialized record = ARecord.Serialize(recorder->records[i]);
+        save(record, path);
+    }
+
+    log_message(LOG_INFO, "Records saved");
+}
+
+static int Load(Recorder *recorder, const char *path)
+{
+    if (recorder->is_recording)
+    {
+        log_message(LOG_WARNING, "Recorder is recording");
+        return 1;
+    }
+
+    Serialized **data;
+    size_t count;
+    if (load_all(&data, &count, path) > 0)
+    {
+        log_message(LOG_ERROR, "Failed to load records");
+        return 1;
+    }
+
+    for (size_t i = 0; i < count; i++)
+    {
+        Record *record = ARecord.Deserialize(*(data[i]));
+        AddRecord(record);
+    }
+
+    // Free the allocated memory
+    for (size_t i = 0; i < count; i++)
+    {
+        free(data[i]);
+    }
+    free(*data);
+
+    return 0;
+}
+
 extern struct ARecorder ARecorder;
 struct ARecorder ARecorder =
     {
@@ -230,4 +293,6 @@ struct ARecorder ARecorder =
         .SelectRecord = SelectRecord,
         .AddRecord = AddRecord,
         .RemoveRecord = RemoveRecord,
+        .Save = Save,
+        .Load = Load,
 };

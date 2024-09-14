@@ -14,9 +14,6 @@
 
 #include <stdlib.h>
 
-#include <recorder.h>
-#include <record.h>
-
 typedef struct Serialized Serialized;
 struct Serialized
 {
@@ -29,6 +26,6 @@ int save(Serialized data, const char *path);
 int save_all(Serialized *data_array, size_t count, const char *path);
 int get_serialized_sizes(size_t **sizes, size_t *count, const char *path);
 int load(Serialized *data, const char *path, size_t start);
-int load_all(Serialized ***data, const char *path);
+int load_all(Serialized ***data, size_t *count, const char *path);
 
 #endif

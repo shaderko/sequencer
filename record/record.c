@@ -10,13 +10,18 @@
  */
 
 #include <record.h>
+
+#include <logger.h>
 #include <threads.h>
+#include <input.h>
+#include <helper.h>
 
 static Record *Init()
 {
     Record *record = malloc(sizeof(Record));
     if (!record)
     {
+        log_message(LOG_ERROR, "Couldn't allocate memory for record");
         return NULL;
     }
 
@@ -25,11 +30,11 @@ static Record *Init()
     return record;
 }
 
-static void *AddAction(Record *record, Action *action)
+static void AddAction(Record *record, Action *action)
 {
     if (!record || !action)
     {
-        puts("[WARNING] Couldn't add action");
+        log_message(LOG_WARNING, "Couldn't add action");
         return;
     }
 
@@ -48,7 +53,7 @@ static void *AddAction(Record *record, Action *action)
     current->next = action;
 }
 
-void *ExecuteSequenceThread(void *arg)
+void ExecuteSequenceThread(void *arg)
 {
     // Cast the argument to the appropriate struct type
     ExecuteSequenceArgs *args = (ExecuteSequenceArgs *)arg;
@@ -60,10 +65,10 @@ void *ExecuteSequenceThread(void *arg)
     free(args);
 
     // End the thread
-    return NULL;
+    return;
 }
 
-unsigned __stdcall ProgressThread(void *param)
+void __stdcall ProgressThread(void *param)
 {
     int total_delay = (int)param;
     if (total_delay < 0)
@@ -79,7 +84,7 @@ unsigned __stdcall ProgressThread(void *param)
 
     printf("\n");
 
-    return 0;
+    return;
 }
 
 static void ExecuteSequence(Record *record, int starting_index)

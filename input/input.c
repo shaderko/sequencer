@@ -111,7 +111,7 @@ LRESULT CALLBACK KeyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
                 // Gracefully exit the message loop
                 // PostQuitMessage(0); // Posts a WM_QUIT message to exit the message loop
                 Recorder *recorder = ARecorder.Init();
-                save_records(recorder);
+                ARecorder.Save(recorder, "save.xdlmaorofl");
             }
             else if (kbd->vkCode == 0x43)
             {

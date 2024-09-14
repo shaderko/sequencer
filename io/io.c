@@ -224,7 +224,7 @@ int load(Serialized *data, const char *path, size_t start)
     return 0;
 }
 
-int load_all(Serialized ***data, const char *path)
+int load_all(Serialized ***data, size_t *count, const char *path)
 {
     if (!data)
     {
@@ -234,8 +234,7 @@ int load_all(Serialized ***data, const char *path)
 
     // get the sizes of all the serialized data in file
     size_t *sizes;
-    size_t count;
-    int status = get_serialized_sizes(&sizes, &count, path);
+    int status = get_serialized_sizes(&sizes, count, path);
     if (status != 0)
     {
         log_message(LOG_ERROR, "Failed to get serialized data sizes");
@@ -243,7 +242,7 @@ int load_all(Serialized ***data, const char *path)
     }
 
     // allocate memory for the serialized data
-    *data = (Serialized **)malloc(count * sizeof(Serialized *));
+    *data = (Serialized **)malloc(*count * sizeof(Serialized *));
     if (!*data)
     {
         log_message(LOG_ERROR, "Failed to allocate memory for serialized data");
@@ -254,7 +253,7 @@ int load_all(Serialized ***data, const char *path)
     size_t starting_size = 0;
 
     // load the serialized data
-    for (size_t i = 0; i < count; i++)
+    for (size_t i = 0; i < *count; i++)
     {
         Serialized *serialized = (Serialized *)malloc(sizeof(Serialized));
         if (!serialized)
@@ -292,122 +291,4 @@ int load_all(Serialized ***data, const char *path)
     free(sizes);
 
     return 0;
-}
-
-void save_records(Recorder *recorder)
-{
-    if (!recorder || !recorder->current)
-    {
-        return;
-    }
-
-    puts("opening file");
-
-    FILE *file = fopen("records.xdlmaorofl", "wb");
-    if (!file)
-    {
-        printf("Failed to open file for writing\n");
-        return;
-    }
-
-    // Serialize the record
-    for (int i = 0; i < recorder->record_count; i++)
-    {
-        Record *record = recorder->records[i];
-        Serialized serialized = ARecord.Serialize(record);
-        if (!serialized.buffer || serialized.size == 0)
-        {
-            printf("Failed to serialize the record\n");
-            fclose(file);
-            return;
-        }
-
-        // Write the size of the serialized data first
-        fwrite(&serialized.size, sizeof(size_t), 1, file);
-        // Write the serialized data to the file
-        fwrite(serialized.buffer, sizeof(unsigned char), serialized.size, file);
-
-        // Free the serialized buffer
-        free(serialized.buffer);
-    }
-
-    // Close the file
-    fclose(file);
-
-    printf("Records saved successfully\n");
-}
-
-void load_records(Recorder *recorder)
-{
-    if (!recorder)
-    {
-        return;
-    }
-
-    FILE *file = fopen("records.xdlmaorofl", "rb");
-    if (!file)
-    {
-        printf("Failed to open file for reading\n");
-        return;
-    }
-
-    // Initialize record count to 0 before loading
-    recorder->record_count = 0;
-
-    // Loop through the file and deserialize each record
-    while (!feof(file))
-    {
-        // Read the size of the serialized data
-        size_t serialized_size;
-        if (fread(&serialized_size, sizeof(size_t), 1, file) != 1)
-        {
-            if (feof(file)) // End of file, break the loop
-            {
-                break;
-            }
-            printf("Failed to read serialized data size\n");
-            fclose(file);
-            return;
-        }
-
-        // Allocate memory for the serialized data
-        unsigned char *buffer = malloc(serialized_size);
-        if (!buffer)
-        {
-            printf("Failed to allocate memory for serialized data\n");
-            fclose(file);
-            return;
-        }
-
-        // Read the serialized data into the buffer
-        if (fread(buffer, sizeof(unsigned char), serialized_size, file) != serialized_size)
-        {
-            printf("Failed to read serialized data\n");
-            free(buffer);
-            fclose(file);
-            return;
-        }
-
-        // Deserialize the data into a Record
-        Serialized serialized = {buffer, serialized_size};
-        Record *record = ARecord.Deserialize(serialized);
-        if (!record)
-        {
-            printf("Failed to deserialize the record\n");
-            free(buffer);
-            fclose(file);
-            return;
-        }
-
-        // Add the deserialized record to the recorder's records array
-        ARecorder.AddRecord(record);
-
-        // Free the serialized buffer
-        free(buffer);
-    }
-
-    // Close the file
-    fclose(file);
-
-    printf("Records loaded successfully\n");
 }

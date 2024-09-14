@@ -26,9 +26,9 @@ struct ARecord
 {
     Record *(*Init)();
 
-    void *(*ExecuteSequenceThread)(void *arg);
+    void (*ExecuteSequenceThread)(void *arg);
 
-    void *(*AddAction)(Record *record, Action *action);
+    void (*AddAction)(Record *record, Action *action);
 
     void (*ExecuteSequence)(Record *record, int starting_index);
 

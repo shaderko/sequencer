@@ -10,11 +10,11 @@
  */
 
 #include <stdio.h>
+#include <SDL2/SDL.h>
 
 #include <logger.h>
 #include <input.h>
 #include <recorder.h>
-#include <io.h>
 
 void print_welcome_message()
 {
@@ -31,9 +31,10 @@ void print_welcome_message()
 }
 
 // function to clean up any resources that need to be cleaned up and save records at exit
-void cleanup_and_save_records(Recorder *r)
+void cleanup_and_save_records()
 {
-    save_records(r);
+    Recorder *r = ARecorder.Init();
+    ARecorder.Save(r, "save.xdlmaorofl");
 }
 
 int main()
@@ -45,7 +46,10 @@ int main()
 
     // create the main recorder, this is what records actions and replays them
     Recorder *r = ARecorder.Init();
-    load_records(r);
+    if (ARecorder.Load(r, "save.xdlmaorofl") > 0)
+    {
+        log_message(LOG_ERROR, "Failed to load records");
+    }
 
     // register the save_records function to be called at exit
     atexit(cleanup_and_save_records);
@@ -75,7 +79,7 @@ int main()
     UnhookWindowsHookEx(mouse_hook);
 
     // save records if we get here
-    save_records(r);
+    ARecorder.Save(r, "save.xdlmaorofl");
 
     return 0;
 }

@@ -52,9 +52,9 @@ struct AAction
 {
     Action *(*Init)();
 
-    MouseAction *(*MouseActionInit)(int x, int y, bool is_press, int button, int time);
+    Action *(*MouseActionInit)(int x, int y, bool is_press, int button, int time);
 
-    KeyboardAction *(*KeyboardActionInit)(bool is_press, int key, int time);
+    Action *(*KeyboardActionInit)(bool is_press, int key, int time);
 
     void (*LinkActions)(Action *action, Action *next);
 

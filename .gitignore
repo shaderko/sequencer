@@ -1,3 +1,9 @@
+# Save files
+*.xdlmaorofl
+
+# Log files
+*.log
+
 # Prerequisites
 *.d
 

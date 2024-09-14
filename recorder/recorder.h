@@ -29,6 +29,10 @@ struct ARecorder
     void (*AddRecord)(Record *record);
 
     void (*RemoveRecord)(int index);
+
+    int (*Save)(Recorder *recorder, const char *path);
+
+    int (*Load)(Recorder *recorder, const char *path);
 };
 
 extern struct ARecorder ARecorder;
