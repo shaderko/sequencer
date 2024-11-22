@@ -13,7 +13,6 @@
 
 #include <logger.h>
 #include <threads.h>
-#include <input.h>
 #include <helper.h>
 
 static Record *Init()
@@ -68,24 +67,24 @@ void ExecuteSequenceThread(void *arg)
     return;
 }
 
-void __stdcall ProgressThread(void *param)
-{
-    int total_delay = (int)param;
-    if (total_delay < 0)
-    {
-        return;
-    }
+// void __stdcall ProgressThread(void *param)
+// {
+//     int total_delay = (int)param;
+//     if (total_delay < 0)
+//     {
+//         return;
+//     }
 
-    for (int i = 0; i < 100; i++)
-    {
-        print_progress_bar(i);
-        cross_platform_sleep(total_delay / 100);
-    }
+//     for (int i = 0; i < 100; i++)
+//     {
+//         print_progress_bar(i);
+//         cross_platform_sleep(total_delay / 100);
+//     }
 
-    printf("\n");
+//     printf("\n");
 
-    return;
-}
+//     return;
+// }
 
 static void ExecuteSequence(Record *record, int starting_index)
 {
@@ -144,7 +143,7 @@ static void ExecuteSequence(Record *record, int starting_index)
 
         printf("%i\n", i);
 
-        AThreads.CreateThreads(ProgressThread, total_delay);
+        // AThreads.CreateThreads(ProgressThread, total_delay);
 
         AAction.ExecuteSequence(current);
 
@@ -238,7 +237,7 @@ static Record *Deserialize(Serialized serialized)
     Action *prev_action = NULL;
 
     // deserialize all actions for this record
-    int offset = sizeof(double) + sizeof(double) + sizeof(int);
+    size_t offset = sizeof(double) + sizeof(double) + sizeof(int);
     while (offset < serialized.size)
     {
         Serialized action_serialized = {NULL, 0};

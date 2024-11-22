@@ -5,6 +5,13 @@
 
 #include <record.h>
 
+#ifdef _WIN32
+#include <windows.h>
+#else
+#include <ApplicationServices/ApplicationServices.h>
+#include <mach/mach_time.h>
+#endif
+
 typedef struct Recorder Recorder;
 struct Recorder
 {
@@ -30,7 +37,7 @@ struct ARecorder
 
     void (*RemoveRecord)(int index);
 
-    int (*Save)(Recorder *recorder, const char *path);
+    void (*Save)(Recorder *recorder, const char *path);
 
     int (*Load)(Recorder *recorder, const char *path);
 };

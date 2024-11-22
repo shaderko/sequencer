@@ -11,7 +11,7 @@
 
 #include <helper.h>
 
-void cross_platform_sleep(int microseconds)
+void cross_platform_sleep(double microseconds)
 {
 #ifdef _WIN32
     // Sleep expects milliseconds, so divide by 1000

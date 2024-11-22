@@ -46,3 +46,138 @@
 [2024-09-14 17:02:53] [INFO] Records saved
 [2024-09-14 17:02:55] [INFO] Loading saved records...
 [2024-09-14 17:03:25] [INFO] Records saved
+[2024-11-21 11:03:07] [INFO] Loading saved records...
+[2024-11-21 11:08:51] [INFO] Loading saved records...
+[2024-11-21 11:09:47] [INFO] Loading saved records...
+[2024-11-21 11:13:27] [INFO] Loading saved records...
+[2024-11-21 11:43:14] [INFO] Loading saved records...
+[2024-11-21 11:47:22] [INFO] Loading saved records...
+[2024-11-21 11:47:22] [ERROR] Failed to open file for reading
+[2024-11-21 11:47:22] [ERROR] Failed to get serialized data sizes
+[2024-11-21 11:47:22] [ERROR] Failed to load records
+[2024-11-21 11:47:22] [ERROR] Failed to load records
+[2024-11-21 11:47:24] [INFO] Recording started
+[2024-11-21 11:47:24] [WARNING] Failed to create event tap
+[2024-11-21 11:47:46] [INFO] Recording started
+[2024-11-21 11:47:46] [INFO] Key up event detected
+[2024-11-21 11:47:47] [INFO] Key down event detected
+[2024-11-21 11:47:47] [INFO] Key up event detected
+[2024-11-21 11:47:48] [INFO] Key down event detected
+[2024-11-21 11:47:49] [INFO] Key up event detected
+[2024-11-21 11:47:49] [INFO] Key down event detected
+[2024-11-21 11:47:49] [INFO] Key up event detected
+[2024-11-21 11:47:50] [INFO] Key down event detected
+[2024-11-21 11:47:50] [INFO] Key up event detected
+[2024-11-21 11:47:50] [INFO] Key down event detected
+[2024-11-21 11:47:50] [INFO] Key down event detected
+[2024-11-21 11:47:50] [INFO] Key up event detected
+[2024-11-21 11:47:51] [INFO] Key down event detected
+[2024-11-21 11:47:51] [INFO] Key up event detected
+[2024-11-21 11:47:51] [INFO] Key up event detected
+[2024-11-21 11:47:51] [INFO] Key down event detected
+[2024-11-21 11:47:51] [INFO] Key up event detected
+[2024-11-21 11:47:51] [INFO] Key down event detected
+[2024-11-21 11:47:51] [INFO] Key up event detected
+[2024-11-21 11:47:52] [INFO] Mouse button down event detected
+[2024-11-21 11:47:52] [INFO] Mouse button up event detected
+[2024-11-21 11:47:52] [INFO] Mouse button down event detected
+[2024-11-21 11:47:52] [INFO] Mouse button up event detected
+[2024-11-21 11:47:52] [INFO] Mouse button down event detected
+[2024-11-21 11:47:52] [INFO] Mouse button up event detected
+[2024-11-21 11:47:53] [INFO] Mouse button down event detected
+[2024-11-21 11:47:53] [INFO] Mouse button up event detected
+[2024-11-21 11:47:54] [INFO] Mouse button down event detected
+[2024-11-21 11:47:54] [INFO] Mouse button up event detected
+[2024-11-21 11:47:55] [INFO] Mouse button down event detected
+[2024-11-21 11:47:55] [INFO] Mouse button up event detected
+[2024-11-21 11:47:56] [INFO] Mouse button down event detected
+[2024-11-21 11:47:56] [INFO] Mouse button up event detected
+[2024-11-21 11:47:57] [INFO] Mouse button down event detected
+[2024-11-21 11:47:57] [INFO] Mouse button up event detected
+[2024-11-21 11:47:57] [INFO] Mouse button down event detected
+[2024-11-21 11:47:57] [INFO] Mouse button up event detected
+[2024-11-21 11:47:57] [INFO] Mouse button down event detected
+[2024-11-21 11:47:57] [INFO] Mouse button up event detected
+[2024-11-21 11:47:57] [INFO] Mouse button down event detected
+[2024-11-21 11:47:57] [INFO] Mouse button up event detected
+[2024-11-21 11:47:57] [INFO] Mouse button down event detected
+[2024-11-21 11:47:57] [INFO] Mouse button up event detected
+[2024-11-21 11:47:58] [INFO] Mouse button down event detected
+[2024-11-21 11:47:58] [INFO] Mouse button up event detected
+[2024-11-21 11:47:59] [INFO] Key down event detected
+[2024-11-21 11:47:59] [INFO] Key up event detected
+[2024-11-21 11:47:59] [INFO] Key down event detected
+[2024-11-21 11:47:59] [INFO] Key up event detected
+[2024-11-21 11:47:59] [INFO] Key down event detected
+[2024-11-21 11:47:59] [INFO] Key up event detected
+[2024-11-21 11:47:59] [INFO] Key down event detected
+[2024-11-21 11:47:59] [INFO] Key up event detected
+[2024-11-21 11:48:00] [INFO] Key down event detected
+[2024-11-21 11:48:00] [INFO] Key up event detected
+[2024-11-21 11:48:02] [INFO] Key down event detected
+[2024-11-21 11:48:02] [INFO] Key up event detected
+[2024-11-21 11:48:02] [INFO] Key down event detected
+[2024-11-21 11:48:02] [INFO] Key up event detected
+[2024-11-21 11:48:02] [INFO] Key down event detected
+[2024-11-21 11:48:02] [INFO] Key up event detected
+[2024-11-21 11:48:02] [INFO] Key down event detected
+[2024-11-21 11:48:02] [INFO] Key up event detected
+[2024-11-21 11:48:03] [INFO] Key down event detected
+[2024-11-21 11:56:13] [INFO] Loading saved records...
+[2024-11-21 11:56:13] [ERROR] Failed to open file for reading
+[2024-11-21 11:56:13] [ERROR] Failed to get serialized data sizes
+[2024-11-21 11:56:13] [ERROR] Failed to load records
+[2024-11-21 11:56:13] [ERROR] Failed to load records
+[2024-11-21 11:56:15] [INFO] Recording started
+[2024-11-21 11:56:20] [INFO] Recording stopped
+[2024-11-21 12:07:46] [INFO] Loading saved records...
+[2024-11-21 12:07:46] [ERROR] Failed to open file for reading
+[2024-11-21 12:07:46] [ERROR] Failed to get serialized data sizes
+[2024-11-21 12:07:46] [ERROR] Failed to load records
+[2024-11-21 12:07:46] [ERROR] Failed to load records
+[2024-11-21 12:07:58] [INFO] Recording started
+[2024-11-21 12:08:05] [INFO] Recording stopped
+[2024-11-21 12:18:17] [INFO] Records saved
+[2024-11-21 12:18:17] [INFO] Records saved
+[2024-11-21 12:18:22] [INFO] Loading saved records...
+[2024-11-21 12:18:44] [INFO] Loading saved records...
+[2024-11-21 12:18:49] [INFO] Loading saved records...
+[2024-11-21 12:18:49] [ERROR] Failed to open file for reading
+[2024-11-21 12:18:49] [ERROR] Failed to get serialized data sizes
+[2024-11-21 12:18:49] [ERROR] Failed to load records
+[2024-11-21 12:18:49] [ERROR] Failed to load records
+[2024-11-21 12:18:55] [INFO] Recording started
+[2024-11-21 12:19:02] [INFO] Recording stopped
+[2024-11-21 12:26:25] [INFO] Loading saved records...
+[2024-11-21 12:26:25] [ERROR] Failed to open file for reading
+[2024-11-21 12:26:25] [ERROR] Failed to get serialized data sizes
+[2024-11-21 12:26:25] [ERROR] Failed to load records
+[2024-11-21 12:26:25] [ERROR] Failed to load records
+[2024-11-21 12:26:29] [INFO] Recording started
+[2024-11-21 12:26:33] [INFO] Recording stopped
+[2024-11-21 12:27:37] [INFO] Records saved
+[2024-11-21 12:27:37] [INFO] Records saved
+[2024-11-21 12:27:41] [INFO] Loading saved records...
+[2024-11-21 12:31:23] [INFO] Loading saved records...
+[2024-11-21 12:31:23] [ERROR] Failed to open file for reading
+[2024-11-21 12:31:23] [ERROR] Failed to get serialized data sizes
+[2024-11-21 12:31:23] [ERROR] Failed to load records
+[2024-11-21 12:31:23] [ERROR] Failed to load records
+[2024-11-21 12:31:46] [INFO] Loading saved records...
+[2024-11-21 12:31:46] [ERROR] Failed to open file for reading
+[2024-11-21 12:31:46] [ERROR] Failed to get serialized data sizes
+[2024-11-21 12:31:46] [ERROR] Failed to load records
+[2024-11-21 12:31:46] [ERROR] Failed to load records
+[2024-11-21 12:31:55] [INFO] Recording started
+[2024-11-21 12:31:55] [WARNING] Failed to create event tap
+[2024-11-21 12:32:05] [INFO] Recording started
+[2024-11-21 12:32:19] [INFO] Recording stopped
+[2024-11-21 12:34:02] [INFO] Loading saved records...
+[2024-11-21 12:34:02] [ERROR] Failed to open file for reading
+[2024-11-21 12:34:02] [ERROR] Failed to get serialized data sizes
+[2024-11-21 12:34:02] [ERROR] Failed to load records
+[2024-11-21 12:34:02] [ERROR] Failed to load records
+[2024-11-21 12:34:05] [INFO] Recording started
+[2024-11-21 12:34:13] [INFO] Recording stopped
+[2024-11-21 12:38:49] [INFO] Recording started
+[2024-11-21 12:38:58] [INFO] Recording stopped

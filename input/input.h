@@ -14,17 +14,17 @@
 
 #include <actions.h>
 #include <record.h>
+#ifdef _WIN32
 #include <windows.h>
-
-LRESULT CALLBACK KeyboardProc(int nCode, WPARAM wParam, LPARAM lParam);
-LRESULT CALLBACK MouseProc(int nCode, WPARAM wParam, LPARAM lParam);
-
-void cross_platform_sleep(int microseconds);
+#else
+#include <ApplicationServices/ApplicationServices.h>
+#include <unistd.h>
+#endif
 
 void keyboard_action_down(KeyboardAction *action);
 void keyboard_action_up(KeyboardAction *action);
 void mouse_action_down(MouseAction *action);
 void mouse_action_up(MouseAction *action);
-void print_progress_bar(int percentage);
+// void print_progress_bar(int percentage);
 
 #endif

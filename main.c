@@ -11,9 +11,10 @@
 
 #include <stdio.h>
 #include <SDL2/SDL.h>
+#include <stdbool.h>
 
 #include <logger.h>
-#include <input.h>
+// #include <input.h>
 #include <recorder.h>
 
 void print_welcome_message()
@@ -37,6 +38,17 @@ void cleanup_and_save_records()
     ARecorder.Save(r, "save.xdlmaorofl");
 }
 
+void display_help()
+{
+    printf("Available commands:\n");
+    printf("  help       - Show this help message\n");
+    printf("  record N   - Record with number N\n");
+    printf("  repeat N   - Repeat action N times\n");
+    printf("  load path  - Load saved records, optional path argument\n");
+    printf("  save path  - Save records, optional path argument\n");
+    printf("  exit       - Quit the program\n");
+}
+
 int main()
 {
     // initialize writing logs to a file
@@ -56,27 +68,83 @@ int main()
 
     print_welcome_message();
 
-    // set keyboard hooks for the main thread
-    HHOOK keyboard_hook = SetWindowsHookEx(WH_KEYBOARD_LL, KeyboardProc, NULL, 0);
-    HHOOK mouse_hook = SetWindowsHookEx(WH_MOUSE_LL, MouseProc, NULL, 0);
-
-    if (!keyboard_hook || !mouse_hook)
+    bool running = true;
+    while (running)
     {
-        log_message(LOG_ERROR, "Failed to set hooks");
-        return 1;
-    }
+        // create a buffer to store commands
+        char input[1024];
+        printf("> ");
 
-    // process messages in the message queue
-    MSG msg;
-    while (GetMessage(&msg, NULL, 0, 0))
-    {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
-    }
+        fgets(input, sizeof(input), stdin);
 
-    // unhook when done
-    UnhookWindowsHookEx(keyboard_hook);
-    UnhookWindowsHookEx(mouse_hook);
+        input[strcspn(input, "\n")] = '\0';
+
+        // Tokenize the input into command and arguments
+        char *command = strtok(input, " "); // First token is the command
+        char *arg = strtok(NULL, " ");      // Second token is the argument (if any)
+
+        if (command == NULL)
+        {
+            continue; // Skip empty input
+        }
+
+        // Match commands
+        if (strcmp(command, "help") == 0)
+        {
+            display_help();
+        }
+        else if (strcmp(command, "record") == 0)
+        {
+            if (arg != NULL)
+            {
+                int recordNumber = atoi(arg); // Convert argument to integer
+                ARecorder.SelectRecord(r, recordNumber);
+            }
+            else
+            {
+                printf("Error: 'record' command requires a number argument.\n");
+            }
+        }
+        else if (strcmp(command, "repeat") == 0)
+        {
+            if (arg != NULL)
+            {
+                int times = atoi(arg); // Convert argument to integer
+                ARecord.SelectRepeat(r->current, times);
+            }
+            else
+            {
+                printf("Error: 'repeat' command requires a number argument.\n");
+            }
+        }
+        else if (strcmp(command, "x") == 0)
+        {
+            ARecorder.StartRecording(r);
+        }
+        else if (strcmp(command, "replay") == 0)
+        {
+            ARecord.ExecuteSequence(r->current, 0);
+        }
+        else if (strcmp(command, "save") == 0)
+        {
+            const char *path = (arg != NULL) ? arg : "save.xdlmaorofl"; // Default path if not provided
+            ARecorder.Save(r, path);
+        }
+        else if (strcmp(command, "load") == 0)
+        {
+            const char *path = (arg != NULL) ? arg : "save.xdlmaorofl"; // Default path if not provided
+            ARecorder.Load(r, path);
+        }
+        else if (strcmp(command, "exit") == 0)
+        {
+            printf("Exiting...\n");
+            running = 0; // Exit the loop
+        }
+        else
+        {
+            printf("Invalid command: '%s'. Type 'help' for a list of commands.\n", command);
+        }
+    }
 
     // save records if we get here
     ARecorder.Save(r, "save.xdlmaorofl");

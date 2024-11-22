@@ -20,6 +20,6 @@
 #include <unistd.h>
 #endif
 
-void cross_platform_sleep(int microseconds);
+void cross_platform_sleep(double microseconds);
 
 #endif

@@ -5,7 +5,9 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <time.h>
 
+#include <helper.h>
 #include <io.h>
 
 typedef enum
@@ -36,7 +38,7 @@ struct KeyboardAction
 typedef struct Action Action;
 struct Action
 {
-    time_t time;
+    double time;
     ActionType type;
 
     union
@@ -52,9 +54,9 @@ struct AAction
 {
     Action *(*Init)();
 
-    Action *(*MouseActionInit)(int x, int y, bool is_press, int button, int time);
+    Action *(*MouseActionInit)(int x, int y, bool is_press, int button, double time);
 
-    Action *(*KeyboardActionInit)(bool is_press, int key, int time);
+    Action *(*KeyboardActionInit)(bool is_press, int key, double time);
 
     void (*LinkActions)(Action *action, Action *next);
 

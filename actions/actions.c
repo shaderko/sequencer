@@ -15,7 +15,7 @@ static Action *Init()
     return action;
 }
 
-static Action *MouseActionInit(int x, int y, bool is_press, int button, int time)
+static Action *MouseActionInit(int x, int y, bool is_press, int button, double time)
 {
     Action *action = Init();
     if (!action)
@@ -41,7 +41,7 @@ static Action *MouseActionInit(int x, int y, bool is_press, int button, int time
     return action;
 }
 
-static Action *KeyboardActionInit(bool is_press, int key, int time)
+static Action *KeyboardActionInit(bool is_press, int key, double time)
 {
     Action *action = Init();
     if (!action)
@@ -115,7 +115,7 @@ static void Execute(Action *action)
         break;
     }
 
-    time_t next_time;
+    double next_time;
     if (action->next)
     {
         next_time = action->next->time;
@@ -140,7 +140,7 @@ static Serialized Serialize(Action *action)
     // serializes and returns a struct with buffer pointer and size
     Serialized serialized;
 
-    serialized.size = sizeof(time_t) + sizeof(ActionType);
+    serialized.size = sizeof(double) + sizeof(ActionType);
     switch (action->type)
     {
     case MOUSE_ACTION:
@@ -157,16 +157,16 @@ static Serialized Serialize(Action *action)
         return serialized;
     }
 
-    memcpy(serialized.buffer, &action->time, sizeof(time_t));
-    memcpy(serialized.buffer + sizeof(time_t), &action->type, sizeof(ActionType));
+    memcpy(serialized.buffer, &action->time, sizeof(double));
+    memcpy(serialized.buffer + sizeof(double), &action->type, sizeof(ActionType));
 
     if (action->type == MOUSE_ACTION)
     {
-        memcpy(serialized.buffer + sizeof(time_t) + sizeof(ActionType), action->data.mouse_action, sizeof(MouseAction));
+        memcpy(serialized.buffer + sizeof(double) + sizeof(ActionType), action->data.mouse_action, sizeof(MouseAction));
     }
     else if (action->type == KEYBOARD_ACTION)
     {
-        memcpy(serialized.buffer + sizeof(time_t) + sizeof(ActionType), action->data.keyboard_action, sizeof(KeyboardAction));
+        memcpy(serialized.buffer + sizeof(double) + sizeof(ActionType), action->data.keyboard_action, sizeof(KeyboardAction));
     }
 
     return serialized;
@@ -179,8 +179,8 @@ static Action *Deserialize(Serialized serialized)
 
     unsigned char *buffer_ptr = serialized.buffer;
 
-    memcpy(&action->time, buffer_ptr, sizeof(time_t));
-    buffer_ptr += sizeof(time_t);
+    memcpy(&action->time, buffer_ptr, sizeof(double));
+    buffer_ptr += sizeof(double);
 
     memcpy(&action->type, buffer_ptr, sizeof(ActionType));
     buffer_ptr += sizeof(ActionType);
